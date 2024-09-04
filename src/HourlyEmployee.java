@@ -1,21 +1,21 @@
-import java.security.PrivilegedAction;
-
 public class HourlyEmployee extends Employee {
 
     private double wage;
-    private double horus;
+    private double hours;
 
-    public HourlyEmployee(String firstName, String lastName, String socialSecurityNumber) {
+    public HourlyEmployee(String firstName, String lastName, String socialSecurityNumber, double wage, double hours) {
         super(firstName, lastName, socialSecurityNumber);
+        this.wage = wage;
+        this.hours = hours;
     }
 
     @Override
     public double earnings() {
-        if (getHorus() <= 40){
-            return getWage() * getHorus();
+        if (getHours() <= 40){
+            return getWage() * getHours();
         }
 
-        return 40 * getWage() + (getHorus() - 40) * getWage() * 1.5;
+        return 40 * getWage() + (getHours() - 40) * getWage() * 1.5;
 
     }
 
@@ -27,17 +27,21 @@ public class HourlyEmployee extends Employee {
         this.wage = wage;
     }
 
-    public double getHorus() {
-        return horus;
+    public double getHours() {
+        return hours;
     }
 
-    public void setHorus(double horus) {
-        this.horus = horus;
+    public void setHours(double hours) {
+        this.hours = hours;
     }
 
     @Override
     public String toString() {
-        return "Employee Information: " + super.toString() + "\nWage: " + wage + "\nHorus: " + horus + "\n";
+        return String.format(
+                "Employee Information: %s%nWage: %.2f%nHours: %.2f%n",
+                super.toString(), wage, hours
+        );
     }
+
 
 }
